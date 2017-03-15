@@ -3,6 +3,8 @@
 
 Beautiful quotes for your Emacs *scratch* buffer.
 
+![Quotes](_assets/demo.gif?raw=true "Quotes")
+
 ## Installation
 
 Clone this repository or download it as zip. Add it to your `load-path`:
@@ -20,6 +22,14 @@ Clone this repository or download it as zip. Add it to your `load-path`:
             (lambda ()
               (run-with-timer 1 nil 'qs/refresh-scratch-buffer)
               (qs/refresh-quote-when-idle)))
+
+;; You can add new quotes to the collection or have the Quote of the Day from
+;; [http://quotes.rest/](http://quotes.rest).
+;; For the latter:
+
+(add-hook 'emacs-startup-hook
+            (lambda ()
+              (run-with-timer 1 nil 'qs/fetch-qod))
 
 ```
 
