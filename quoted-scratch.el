@@ -225,6 +225,33 @@ delete all text in a buffer."
                                 (point-max))))
     beg))
 
+(defun qs/update-quote-text-in-scratch (quote-text)
+  "Update quote text in *scratch* with QUOTE-TEXT."
+  (with-current-buffer (get-buffer-create "*scratch*")
+    (let ((quote-visible-p (pos-visible-in-window-p (point-min)))
+          (here-marker (point-marker))
+          (inhibit-read-only t))
+
+      ;; Advance marker when we insert text at its position
+      (set-marker-insertion-type here-marker t)
+
+      ;; I might have fragmented the quote text in which case, I would
+      ;; like to work only on the quote text and not change the other
+      ;; unrelated text in the scratch buffer.
+      (while (qs/remove-text-with-property (point-min)
+                                           :text-type
+                                           :quote-string))
+      ;; Now insert new quote at the top of the buffer
+      (goto-char (point-min))
+      (insert quote-text)
+      (pulse-momentary-highlight-region (point-min)
+                                        (point)
+                                        'next-error)
+      (font-lock-mode 1)
+      (goto-char (marker-position here-marker))
+      (when quote-visible-p
+        (set-window-start (selected-window) (point-min))))))
+
 (defun qs/qod-callback (status)
   "Callback for ‘qs/fetch-qod’ command.
 
@@ -245,12 +272,7 @@ Argument STATUS is the http status of the request."
                                                    quote-author)
                                  'font-lock-face qs/quote-face
                                  'rear-nonsticky t)))
-        (kill-buffer)
-        (with-current-buffer (get-buffer-create "*scratch*")
-          (erase-buffer)
-          (insert (qs/generate-scratch-message quote*))
-          (goto-char (point-max))
-          (message "Quote in *scratch*")))
+        (qs/update-quote-text-in-scratch (qs/generate-scratch-message quote*)))
     (message "Error fetching quote: %s"
              (assoc-default 'message
                             (assoc-default 'error (json-read))))))
@@ -260,33 +282,11 @@ Argument STATUS is the http status of the request."
   "Recreate and refresh the scracth buffer.
 Optional argument POP-TO-BUFFERP makes the window pop to the buffer if non-nil."
   (interactive)
-  (with-current-buffer (get-buffer-create "*scratch*")
-    (let ((quote-visible-p (pos-visible-in-window-p (point-min)))
-          (here-marker (point-marker))
-          (inhibit-read-only t)
-          (content (qs/generate-scratch-message)))
-      ;; Advance marker when we insert text at its position
-      (set-marker-insertion-type here-marker t)
-
-      ;; I might have fragmented the quote text in which case, I would
-      ;; like to work only on the quote text and not change the other
-      ;; unrelated text in the scratch buffer.
-      (while (qs/remove-text-with-property (point-min)
-                                           :text-type
-                                           :quote-string))
-      ;; Now insert new quote at the top of the buffer
-      (goto-char (point-min))
-      (insert content)
-      (pulse-momentary-highlight-region (point-min)
-                                        (point)
-                                        'next-error)
-      (font-lock-mode 1)
-      (goto-char (marker-position here-marker))
-      (when quote-visible-p
-        (set-window-start (selected-window) (point-min)))
-      (and pop-to-bufferp (pop-to-buffer "*scratch*")))))
+  (qs/update-quote-text-in-scratch (qs/generate-scratch-message))
+  (and pop-to-bufferp (pop-to-buffer "*scratch*")))
 
 ;;;###autoload
+
 (defun qs/fetch-qod ()
   "Fetches quote of the day from theysaidso.com."
   (interactive)
