@@ -29,26 +29,30 @@
 
 (require 'json)
 
+(defgroup quoted-scratch nil
+  "Customization group for `quoted-scratch'."
+  :group 'environment)
+
 (defcustom qs/quote-face
   '(:foreground "LemonChiffon" :height 1.2)
   "Face for a quote."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type 'face)
 
 (defcustom qs/auroville-quality-face
   ''(:foreground "Sienna" :height 3.0)
   "Face for showing an Auroville quality."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type 'face)
 
 (defcustom qs/show-auroville-quality t
   "Show an Auroville quality along with the quote."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type 'face)
 
 (defcustom qs/quotes-source :quotes-file
   "Source for quotes: 1) Quotes file or http://quotes.rest/."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type '(choice (const :quotes-file) (const :qod)))
 
 (defconst qs/script-directory
@@ -59,12 +63,12 @@
 (defcustom qs/personal-quotes-file
   (expand-file-name "_assets/quotes.txt" qs/script-directory)
   "Path to the custom quotes file.  Must have quotes separated by a newline."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type 'file)
 
 (defcustom qs/quote-idle-refresh-interval 60
   "Refresh scratch buffer quote after these many seconds of inactivity."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type 'number)
 
 (defcustom qs/quotes
@@ -81,7 +85,7 @@
         (buffer-substring-no-properties (point-min) (point-max))
         "\n\n"))))
   "Collection of quotes."
-  :group 'quoted-scratch-mode
+  :group 'quoted-scratch
   :type '(repeat string))
 
 (defun qs/go-to-starting-line ()
