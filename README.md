@@ -16,7 +16,7 @@ Clone this repository or download it as zip. Add it to your `load-path`:
 
 
 ```elisp
-(require 'quoted-search)
+(require 'quoted-scratch)
 
 (add-hook 'emacs-startup-hook
             (lambda ()
