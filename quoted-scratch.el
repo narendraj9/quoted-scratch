@@ -1,9 +1,11 @@
-;;; quoted-scratch --- Quotes for your scratch buffer -*- lexical-binding: t; -*-
+;;; quoted-scratch.el --- Quotes for your scratch buffer -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016  Narendra Joshi
 
 ;; Author: Narendra Joshi <narendraj9@gmail.com>
-;; Keywords: quotes, lore, wisdom
+;; Keywords: quotes, lore, wisdom, data
+;; Version: 0.1
+;; Package-Requires: ((emacs "24"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,6 +25,16 @@
 ;; For displaying a random quote on Emacs startup.  I use it for
 ;; maintianing a list of quotes as well.
 ;;
+;;   (require 'quoted-scratch)
+;;
+;;   (add-hook 'emacs-startup-hook
+;;             (lambda ()
+;;               (run-with-timer 1 nil 'qs/refresh-scratch-buffer)
+;;               (qs/refresh-quote-when-idle)))
+;;
+;; To add new quotes to `qs/personal-quotes-file', use M-x
+;; `qs/add-new-quote'.  If you want the quote to be fetched from
+;; http://quotes.rest/qod.json, use `qs/fetch-qod'.
 ;;
 
 ;;; Code:
@@ -306,4 +318,4 @@ Optional argument POP-TO-BUFFERP makes the window pop to the buffer if non-nil."
 
 (provide 'quoted-scratch)
 
-;;; quoted-scratch ends here
+;;; quoted-scratch.el ends here
