@@ -53,7 +53,7 @@
   :type 'face)
 
 (defcustom qs-auroville-quality-face
-  ''(:foreground "Sienna" :height 3.0)
+  '(:foreground "Sienna" :height 3.0)
   "Face for showing an Auroville quality."
   :group 'quoted-scratch
   :type 'face)
