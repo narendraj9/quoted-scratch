@@ -41,6 +41,7 @@
 
 (require 'json)
 (require 'url)
+(require 'pulse)
 
 (defgroup quoted-scratch nil
   "Customization group for `quoted-scratch'."
