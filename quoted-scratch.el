@@ -26,7 +26,7 @@
 ;; maintianing a list of quotes as well.
 ;;
 ;;   (require 'quoted-scratch)
-;;
+;;   (setq initial-scratch-message nil)
 ;;   (add-hook 'emacs-startup-hook
 ;;             (lambda ()
 ;;               (run-with-timer 1 nil 'qs-refresh-scratch-buffer)
@@ -300,7 +300,6 @@ Optional argument POP-TO-BUFFERP makes the window pop to the buffer if non-nil."
   (and pop-to-bufferp (pop-to-buffer "*scratch*")))
 
 ;;;###autoload
-
 (defun qs-fetch-qod ()
   "Fetches quote of the day from theysaidso.com."
   (interactive)

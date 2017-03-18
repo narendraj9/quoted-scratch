@@ -17,6 +17,7 @@ Clone this repository or download it as zip. Add it to your `load-path`:
 
 ```elisp
 (require 'quoted-scratch)
+(setq initial-scratch-message nil)
 
 (add-hook 'emacs-startup-hook
             (lambda ()
@@ -40,6 +41,7 @@ If you use `use-package`, add this to your init:
   :load-path "/path/to/quoted-scratch/dir/"
   :demand t
   :config
+  (setq initial-scratch-message nil)
   (add-hook 'emacs-startup-hook
             (lambda ()
               (run-with-timer 1 nil 'qs-refresh-scratch-buffer)
