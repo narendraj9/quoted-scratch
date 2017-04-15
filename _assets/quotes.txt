@@ -3349,3 +3349,6 @@ attempts, it is glorious even to fail.”
 
 “Never attribute to malice that which is adequately explained by stupidity.”
                                                        - Hanlon's razor
+
+“It's like the word "silence". When you say it, you break it.”
+                                          - Daak'n (Dinesh @Helpshift)
