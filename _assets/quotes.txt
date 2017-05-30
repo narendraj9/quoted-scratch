@@ -3352,3 +3352,6 @@ attempts, it is glorious even to fail.”
 
 “It's like the word "silence". When you say it, you break it.”
                                           - Daak'n (Dinesh @Helpshift)
+
+“If you hear a voice within you say 'You cannot paint.', then by all means paint, and that voice will be silenced.”
+                                                             - Van Gogh
