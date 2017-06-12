@@ -47,11 +47,12 @@
   "Customization group for `quoted-scratch'."
   :group 'environment)
 
-(defcustom qs-quote-face
-  '(:foreground "LemonChiffon" :height 1.2)
+(defface qs-quote-face
+  '((((class color) (background dark))
+     (:foreground "LemonChiffon" :height 1.2))
+    (t (:foreground "Black")))
   "Face for a quote."
-  :group 'quoted-scratch
-  :type 'face)
+  :group 'quoted-scratch)
 
 (defcustom qs-auroville-quality-face
   '(:foreground "Sienna" :height 3.0)
@@ -127,7 +128,7 @@ Cleans up whitespace."
   (if qs-quotes
       (propertize (format "%s\n\n"
                           (nth (random (length qs-quotes)) qs-quotes))
-                  'font-lock-face qs-quote-face
+                  'font-lock-face 'qs-quote-face
                   'rear-nonsticky t)
     (message "No quotes defined. Maybe the quotes file wasn't parsed properly")))
 
