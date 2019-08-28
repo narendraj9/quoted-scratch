@@ -296,7 +296,7 @@ Argument STATUS is the http status of the request."
              (quote-author (assoc-default 'author quote))
              (quote* (propertize (qs-prepare-quote quote-string
                                                    quote-author)
-                                 'font-lock-face qs-quote-face
+                                 'font-lock-face 'qs-quote-face
                                  'rear-nonsticky t)))
         (qs-update-quote-text-in-scratch (qs-generate-scratch-message quote*)))
     (message "Error fetching quote: %s"
